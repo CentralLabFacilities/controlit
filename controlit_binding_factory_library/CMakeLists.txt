@@ -16,7 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 # message("** controlit_cmake_DIR: " ${controlit_cmake_DIR})
-list(APPEND CMAKE_MODULE_PATH ${controlit_cmake_DIR}/../../../../src/controlit/controlit_cmake/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../controlit/controlit_cmake/Modules)
 # message("** CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
 
 include(controlitbuild)
@@ -36,7 +36,7 @@ find_package(Eigen REQUIRED)
 catkin_package(
     INCLUDE_DIRS include
     LIBRARIES ${PROJECT_NAME}
-    CATKIN_DEPENDS controlit_core
+#    CATKIN_DEPENDS controlit_core
 #    DEPENDS system_lib
 )
 
@@ -65,6 +65,21 @@ add_dependencies(${PROJECT_NAME} controlit_core)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
+)
+
+install(TARGETS ${PROJECT_NAME}
+    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY include/
+    DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
+    FILES_MATCHING PATTERN "*.hpp"
+)
+
+install(DIRECTORY plugins/
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
 # rosbuild_init()

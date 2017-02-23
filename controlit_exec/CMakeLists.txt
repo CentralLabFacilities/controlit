@@ -16,7 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 # message("** controlit_cmake_DIR: " ${controlit_cmake_DIR})
-list(APPEND CMAKE_MODULE_PATH ${controlit_cmake_DIR}/../../../../src/controlit/controlit_cmake/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../controlit/controlit_cmake/Modules)
 # message("** CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
 
 include(controlitbuild)
@@ -34,10 +34,9 @@ find_package(Eigen REQUIRED)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES controlit
-#  CATKIN_DEPENDS other_catkin_pkg
-#  DEPENDS system_lib
+  CATKIN_DEPENDS controlit_core
 )
 
 ###########
@@ -63,19 +62,32 @@ include_directories(
 # file(GLOB SRCS src/*.cpp)
 # add_library(${PROJECT_NAME} SHARED ${SRCS})
 
-## Declare a cpp executable
-add_executable(${PROJECT_NAME} src/ControlItExec.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(controlit_node controlit_generate_messages_cpp)
-add_dependencies(${PROJECT_NAME} controlit_core)
+#add_dependencies(${PROJECT_NAME} controlit_core)
+
+## Declare a cpp executable
+add_executable(${PROJECT_NAME}
+    src/ControlItExec.cpp
+)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
 )
 
+install(TARGETS ${PROJECT_NAME}
+    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY include/
+    DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
+    FILES_MATCHING PATTERN "*.hpp"
+)
 
 # Add the ControlIt!-specific build options and macros
 # rosbuild_find_ros_package(controlit_cmake)

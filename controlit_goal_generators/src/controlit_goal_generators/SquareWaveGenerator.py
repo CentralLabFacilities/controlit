@@ -89,7 +89,7 @@ class SquareWaveGenerator:
 
 
 # Main method
-if __name__ == "__main__":
+def main():
 
     rospy.init_node('SquareWaveGenerator', anonymous=True)
 
@@ -133,3 +133,6 @@ if __name__ == "__main__":
     # Create a SquareWaveGenerator object
     squareWaveGenerator = SquareWaveGenerator(rosTopic, minValue, maxValue, numDoFs, period)
     squareWaveGenerator.start()
+    
+if __name__ == "__main__":
+    main()

@@ -24,7 +24,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 # message("** controlit_cmake_DIR: " ${controlit_cmake_DIR})
-list(APPEND CMAKE_MODULE_PATH ${controlit_cmake_DIR}/../../../../src/controlit/controlit_cmake/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../controlit/controlit_cmake/Modules)
 # message("** CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
 
 include(controlitbuild)
@@ -36,7 +36,6 @@ find_package(Rbdl REQUIRED)
 find_package(TinyXML REQUIRED)
 find_package(YamlCpp REQUIRED)
 find_package(MuParser REQUIRED)
-
 
 ################################################
 ## Declare ROS messages, services and actions ##
@@ -153,10 +152,17 @@ target_link_libraries(${PROJECT_NAME}
     ${Boost_LIBRARIES}
     ${MUPARSER_LIBRARIES}
     ${RBDL_LIBRARY}
-    ${PROJECT_NAME}
     ${TinyXML_LIBRARIES}
     ${YAMLCPP_LIBRARY}
 )
+
+install(TARGETS ${PROJECT_NAME}
+        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
+
+install(DIRECTORY include/
+        DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION})
 
 # Add the ControlIt!-specific build options and macros
 # rosbuild_find_ros_package(controlit_cmake)

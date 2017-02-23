@@ -1,0 +1,4 @@
+#! /usr/bin/env python
+import controlit_goal_generators.SineWaveGenerator as sinewg
+if __name__ == '__main__':
+    sinewg.main()

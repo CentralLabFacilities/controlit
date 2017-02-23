@@ -33,8 +33,8 @@
     <buildtool_depend>catkin</buildtool_depend>
     
     <depend>cmake_modules</depend>
-    <depend>controlit_core</depend>
     <depend>roscpp</depend>
+    <depend>controlit_core</depend>
   
     <export>
         <controlit_core plugin="${prefix}/controller_plugins.xml" />

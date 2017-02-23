@@ -21,7 +21,7 @@ find_package(catkin REQUIRED
 )
 
 # message("** controlit_cmake_DIR: " ${controlit_cmake_DIR})
-list(APPEND CMAKE_MODULE_PATH ${controlit_cmake_DIR}/../../../../src/controlit/controlit_cmake/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../controlit/controlit_cmake/Modules)
 # message("** CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
 
 include(controlitbuild)
@@ -134,6 +134,18 @@ add_dependencies(${PROJECT_NAME}
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}
     ${catkin_LIBRARIES}
+)
+
+install(TARGETS ${PROJECT_NAME}
+        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
+
+install(DIRECTORY include/
+        DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION})
+        
+install(DIRECTORY plugins/
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
 # Add the ControlIt!-specific build options and macros

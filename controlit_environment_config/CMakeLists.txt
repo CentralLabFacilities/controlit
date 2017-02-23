@@ -22,6 +22,10 @@ catkin_package(
 #  DEPENDS system_lib
 )
 
+install(DIRECTORY config
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
 # Add the ControlIt!-specific build options and macros
 # rosbuild_find_ros_package(controlit_cmake)
 # list(APPEND CMAKE_MODULE_PATH ${controlit_cmake_PACKAGE_PATH}/cmake)

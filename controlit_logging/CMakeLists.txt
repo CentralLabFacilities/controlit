@@ -10,13 +10,13 @@ project(controlit_logging)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS  
 	roscpp
-        cmake_modules
+    cmake_modules
 	controlit_cmake
 	controlit_dependency_addons)
 
 # message("** CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
 # message("** controlit_cmake_DIR: " ${controlit_cmake_DIR})
-list(APPEND CMAKE_MODULE_PATH ${controlit_cmake_DIR}/../../../../src/controlit/controlit_cmake/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../controlit_cmake/Modules)
 # message("** CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
 
 include(controlitbuild)
@@ -48,7 +48,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 	include
-        ${catkin_INCLUDE_DIRS}
+    ${catkin_INCLUDE_DIRS}
 	${EIGEN_INCLUDE_DIRS}
 	${controlit_dependency_addons_INCLUDE_DIRS}
 )
@@ -77,6 +77,14 @@ target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
   ${controlit_dependency_addons_LIBRARIES}
 )
+
+install(TARGETS ${PROJECT_NAME}
+        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
+
+install(DIRECTORY include/
+        DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION})
 
 # rosbuild_find_ros_package(controlit_cmake)
 # list(APPEND CMAKE_MODULE_PATH ${controlit_cmake_PACKAGE_PATH}/cmake)

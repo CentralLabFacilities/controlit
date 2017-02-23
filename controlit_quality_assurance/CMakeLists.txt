@@ -6,6 +6,8 @@ project(controlit_quality_assurance)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED)
 
+catkin_python_setup()
+
 ###################################
 ## catkin specific configuration ##
 ###################################
@@ -36,3 +38,17 @@ catkin_package(
 
 # TESTS!
 # add_subdirectory(tests)
+
+install(DIRECTORY
+        launch
+        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+install(FILES
+        parameters/testing_list.yaml
+        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+catkin_install_python(PROGRAMS
+        nodes/groupTest
+        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)

@@ -39,7 +39,7 @@ bool ContainerUtility::checkRange(Vector & vv, double minVal, double maxVal)
 
   for (int ii = 0; ii < vv.size(); ii++)
   {
-    if (isnan(vv(ii)))
+    if (std::isnan(vv(ii)))
     {
       CONTROLIT_WARN << "(Vector): NaN detected at index " << ii << ", returning false!";
       return false;
@@ -72,7 +72,7 @@ bool ContainerUtility::checkRange(Matrix & mm, double minVal, double maxVal)
   {
     for (int jj = 0; jj < mm.cols(); jj++)
     {
-      if (isnan(mm(ii, jj)))
+      if (std::isnan(mm(ii, jj)))
       {
         CONTROLIT_WARN << "(Matrix): NaN detected at index (" << ii << ", " << jj << "), returning false!";
         return false;
@@ -106,7 +106,7 @@ bool ContainerUtility::checkRange(Matrix3d & mm, double minVal, double maxVal)
   {
     for (int jj = 0; jj < mm.cols(); jj++)
     {
-      if (isnan(mm(ii, jj)))
+      if (std::isnan(mm(ii, jj)))
       {
         CONTROLIT_WARN << "(Matrix): NaN detected at index (" << ii << ", " << jj << "), returning false!";
         return false;

@@ -12,6 +12,7 @@
 # to tell CMake where yaml-cpp is.
 
 # attempt to find static library first if this is set
+
 if(YAMLCPP_STATIC_LIBRARY)
     set(YAMLCPP_STATIC libyaml-cpp.a)
 endif()

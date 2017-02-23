@@ -32,6 +32,7 @@
     <!--   <test_depend>gtest</test_depend> -->
     <buildtool_depend>catkin</buildtool_depend>
     <depend>controlit_cmake</depend>
+    <depend>roscpp</depend>
 
     <!-- <depend package="rospy"/>
     <depend package="roscpp"/>

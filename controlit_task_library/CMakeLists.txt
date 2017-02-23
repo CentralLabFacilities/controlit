@@ -12,11 +12,12 @@ find_package(catkin REQUIRED COMPONENTS
     roscpp
     cmake_modules
     controlit_core
+    controlit_cmake
 )
 
-# message("** controlit_cmake_DIR: " ${controlit_cmake_DIR})
-list(APPEND CMAKE_MODULE_PATH ${controlit_cmake_DIR}/../../../../src/controlit/controlit_cmake/cmake)
-# message("** CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
+message("** controlit_cmake_DIR: " ${controlit_cmake_DIR})
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../controlit/controlit_cmake/Modules)
+message("** CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
 
 include(controlitbuild)
 controlit_build_init()
@@ -68,6 +69,15 @@ target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
 )
 
+install(TARGETS ${PROJECT_NAME}
+    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY plugins/
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
 
 # Add the ControlIt!-specific build options and macros
 # rosbuild_find_ros_package(controlit_cmake)

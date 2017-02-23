@@ -30,9 +30,15 @@ else (MUPARSER_LIBRARIES AND MUPARSER_INCLUDE_DIRS)
         find_path(MUPARSER_INCLUDE_DIR NAMES muParser.h)
     endif($ENV{ROS_DISTRO} STREQUAL "hydro")
 
-    find_library(MUPARSER_LIBRARY NAMES muparser PATHS "${BASE_DIR_LIB}"
-                 NO_DEFAULT_PATH)
-    find_library(MUPARSER_LIBRARY NAMES muparser HINTS "/usr/lib")
+    find_library(MUPARSER_LIBRARY NAMES muparser 
+                PATH_SUFFIXES lib64 lib
+                PATHS 
+                    "${BASE_DIR_LIB}"
+                     NO_DEFAULT_PATH
+                HINTS 
+                    "/usr/lib" 
+                    "${CMAKE_INSTALL_PREFIX}/lib"
+                    "/media/local/plueckin/sandbox/lib")
 
     set(MUPARSER_INCLUDE_DIRS
         ${MUPARSER_INCLUDE_DIR} CACHE PATH "Path to MuParser++ headers")

@@ -14,16 +14,16 @@ find_package(catkin REQUIRED COMPONENTS
     cmake_modules
 )
 
-# message("** controlit_cmake_DIR: " ${controlit_cmake_DIR})
-list(APPEND CMAKE_MODULE_PATH ${controlit_cmake_DIR}/../../../../src/controlit/controlit_cmake/cmake)
-# message("** CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
+#message("** controlit_cmake_DIR: " ${controlit_cmake_DIR})
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../controlit_cmake/Modules)
+#message("** CMAKE_MODULE_PATH: " ${CMAKE_MODULE_PATH})
 
 include(controlitbuild)
 controlit_build_init()
 
 find_package(Eigen REQUIRED)
 find_package(Rbdl REQUIRED)
-find_package(YamlCpp REQUIRED)
+find_package(YamlCpp 0.3 EXACT REQUIRED)
 
 ###################################
 ## catkin specific configuration ##
@@ -37,7 +37,7 @@ find_package(YamlCpp REQUIRED)
 catkin_package(
     INCLUDE_DIRS include
     LIBRARIES ${PROJECT_NAME}
-#    CATKIN_DEPENDS other_catkin_pkg
+    CATKIN_DEPENDS roscpp
 #    DEPENDS system_lib
 )
 
@@ -51,6 +51,7 @@ include_directories(
     include
     ${EIGEN_INCLUDE_DIRS}
     ${catkin_INCLUDE_DIRS}
+    ${YAMLCPP_INCLUDE_DIR}
 )
 
 # add_definitions(${EIGEN_DEFINITIONS})
@@ -77,6 +78,13 @@ target_link_libraries(${PROJECT_NAME}
     ${YAMLCPP_LIBRARY}
 )
 
+install(TARGETS ${PROJECT_NAME}
+        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
+
+install(DIRECTORY include/
+        DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION})
 
 # Add the ControlIt!-specific build options and macros
 # rosbuild_find_ros_package(controlit_cmake)

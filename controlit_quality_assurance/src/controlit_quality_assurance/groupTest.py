@@ -84,11 +84,11 @@ class DemoChecking:
 
   def URDF_generator(self):
     print "Generating URDF"
-    os.chdir(self.robot_path+"/hcrl_robot_models/"+self.robot_name+"/models")
+    os.chdir(self.robot_path+"/"+self.robot_name+"/models")
     # print os.getcwd()
     subprocess.call(["sh","generate_"+self.robot_name+"_urdfs.sh"],stdin=None, stdout=self.STDOUT, stderr=self.STDERR, shell=False)
 
-    os.chdir(self.robot_path+"/hcrl_robot_controlit_configs/"+self.robot_name+"_controlit/models")
+    os.chdir(self.robot_path+"/"+self.robot_name+"_controlit/models")
     # print os.getcwd()
     subprocess.call(["sh","generate_"+self.robot_name+"_controlit_urdfs.sh"],stdin=None, stdout=self.STDOUT, stderr=self.STDERR, shell=False)
 
@@ -285,11 +285,11 @@ class DemoChecking:
 
 
 # Main method
-if __name__ == "__main__":
+def main():
 
     # Define default values for the command line arguments
-    ros_workspace = os.popen("echo $ROS_WORKSPACE")
-    robotPath = ros_workspace.read().replace("\n","")
+    ros_workspace = os.popen("echo $ROS_PACKAGE_PATH")
+    robotPath = ros_workspace.read().split(':', 1)[0]
     timeOut = 20
     errorThreshold = 0.05
     stdOut = True 
@@ -377,7 +377,7 @@ if __name__ == "__main__":
 
     originalRobotList = []
     skipRobotList = []
-    yaml_path = robotPath+"/controlit/controlit_quality_assurance/scripts/testing_list.yaml"
+    yaml_path = robotPath+"/controlit_quality_assurance/testing_list.yaml"
     with open(yaml_path, 'r') as testing_list_yaml:
       testing_dict = yaml.load(testing_list_yaml)
       for key in testing_dict:
@@ -510,7 +510,8 @@ if __name__ == "__main__":
     print "-------------------------------"
 
 
-
+if __name__ == '__main__':
+    main()
 
     # robotDict={}
     # #Set the new goal position FOR stickbot_lowerleg_3dof

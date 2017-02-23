@@ -108,7 +108,7 @@ class SineWaveGenerator:
 
 
 # Main method
-if __name__ == "__main__":
+def main():
 
     rospy.init_node('SineWaveGenerator', anonymous=True)
 
@@ -193,3 +193,6 @@ if __name__ == "__main__":
             sineWaveGenerator.setJointIndex(int(index))
 
     rospy.signal_shutdown("done")
+    
+if __name__ == "__main__":
+    main()

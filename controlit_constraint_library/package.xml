@@ -32,8 +32,8 @@
     <!--   <test_depend>gtest</test_depend> -->
     <buildtool_depend>catkin</buildtool_depend>
     
-    <depend>controlit_core</depend>
     <depend>roscpp</depend>
+    <depend>controlit_core</depend>
   
     <export>
         <controlit_core plugin="${prefix}/constraint_plugins.xml" />

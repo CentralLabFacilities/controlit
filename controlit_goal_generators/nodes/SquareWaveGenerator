@@ -1,0 +1,4 @@
+#! /usr/bin/env python
+import controlit_goal_generators.SquareWaveGenerator as squarewg
+if __name__ == '__main__':
+    squarewg.main()

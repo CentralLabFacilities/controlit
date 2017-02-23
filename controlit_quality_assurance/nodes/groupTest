@@ -1,0 +1,4 @@
+#! /usr/bin/env python
+import controlit_quality_assurance.groupTest as gT
+if __name__ == '__main__':
+    gT.main()
